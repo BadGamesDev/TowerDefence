@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -10,10 +7,10 @@ public class MapGenerator : MonoBehaviour
     public GameObject baseTile;
     public GameObject startTile;
 
-    [SerializeField] private int mapWidth;
-    [SerializeField] private int mapHeight;
+    public int mapWidth;
+    public int mapHeight;
 
-    public int currentIndex;
+    private int currentIndex;
     private GameObject currentTile;
 
     private List<GameObject> mapTiles = new List<GameObject>();
@@ -22,7 +19,7 @@ public class MapGenerator : MonoBehaviour
     private void Start()
     {
         lastPaths.Add(3);
-        lastPaths.Add(3);
+        lastPaths.Add(3); //find a better way
 
         generateMap();
         generatePath();
@@ -58,7 +55,7 @@ public class MapGenerator : MonoBehaviour
             {
                 GameObject newTile = Instantiate(mapTileBasic);
                 mapTiles.Add(newTile);
-                newTile.transform.position = new Vector2(x-mapWidth/2, y-mapHeight/2);
+                newTile.transform.position = new Vector2(x-mapWidth/2, y-mapHeight/2);              
             }
         }    
         
