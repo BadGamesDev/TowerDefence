@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathfindingBasic : MonoBehaviour
 {
-    // THIS IS WORKING FOR NOT BUT IT IS FAR FROM PERFECT
+    // THIS IS WORKING FOR NOW BUT IT IS FAR FROM PERFECT
 
     MapGenerator mapGenerator;
 
@@ -22,7 +21,7 @@ public class PathfindingBasic : MonoBehaviour
         RaycastHit2D rayRight = Physics2D.Raycast(transform.position, right, mapGenerator.mapWidth);
         RaycastHit2D rayForward = Physics2D.Raycast(transform.position, forward, mapGenerator.mapWidth);
         
-        if (rayForward.distance <= rayRight.distance && rayForward.distance <= rayLeft.distance)
+        if (rayForward.distance <= rayRight.distance && rayForward.distance <= rayLeft.distance && rayForward.collider.name != "BaseTile(Clone)") // gives errors for some reason
         {
             if (rayLeft.distance > rayRight.distance)
             {

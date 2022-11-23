@@ -15,8 +15,8 @@ public class MapGenerator : MonoBehaviour
 
     private List<GameObject> mapTiles = new List<GameObject>();
     private List<int> lastPaths = new List<int>();
-   
-    private void Start()
+
+    private void Awake()
     {
         lastPaths.Add(3);
         lastPaths.Add(3); //find a better way
@@ -55,7 +55,7 @@ public class MapGenerator : MonoBehaviour
             {
                 GameObject newTile = Instantiate(mapTileBasic);
                 mapTiles.Add(newTile);
-                newTile.transform.position = new Vector2(x-mapWidth/2, y-mapHeight/2);              
+                newTile.transform.position = new Vector2(x-mapWidth/2, y-mapHeight/2);
             }
         }    
         

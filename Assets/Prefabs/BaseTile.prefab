@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7048068771049344138}
   - component: {fileID: 8463572367048792240}
-  - component: {fileID: 887715941747184140}
+  - component: {fileID: 8714266244064799445}
   m_Layer: 0
   m_Name: BaseTile
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &887715941747184140
+--- !u!61 &8714266244064799445
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
