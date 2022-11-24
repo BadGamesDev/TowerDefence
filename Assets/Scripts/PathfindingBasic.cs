@@ -5,6 +5,8 @@ public class PathfindingBasic : MonoBehaviour
     // THIS IS WORKING FOR NOW BUT IT IS FAR FROM PERFECT
 
     MapGenerator mapGenerator;
+    
+    int mapLayer = 1 << 6;
 
     private void Awake()
     {
@@ -17,11 +19,11 @@ public class PathfindingBasic : MonoBehaviour
         Vector3 right = transform.right;
         Vector3 forward = -transform.up; // maybe make it just "up" and turn the transform down?
 
-        RaycastHit2D rayLeft = Physics2D.Raycast(transform.position, left, mapGenerator.mapWidth); // make raycast shorter if there are performance issues (if you do that, add "if 0 something something")
-        RaycastHit2D rayRight = Physics2D.Raycast(transform.position, right, mapGenerator.mapWidth);
-        RaycastHit2D rayForward = Physics2D.Raycast(transform.position, forward, mapGenerator.mapWidth);
+        RaycastHit2D rayLeft = Physics2D.Raycast(transform.position, left, mapGenerator.mapWidth, mapLayer); // make raycast shorter if there are performance issues (if you do that, add "if 0 something something")
+        RaycastHit2D rayRight = Physics2D.Raycast(transform.position, right, mapGenerator.mapWidth, mapLayer);
+        RaycastHit2D rayForward = Physics2D.Raycast(transform.position, forward, mapGenerator.mapWidth, mapLayer);
         
-        if (rayForward.distance <= rayRight.distance && rayForward.distance <= rayLeft.distance && rayForward.collider.name != "BaseTile(Clone)") // gives errors for some reason
+        if (rayForward.distance <= rayRight.distance && rayForward.distance <= rayLeft.distance) //&& rayForward.collider.name != "BaseTile(Clone)") // gives errors for some reason
         {
             if (rayLeft.distance > rayRight.distance)
             {
@@ -57,6 +59,6 @@ public class PathfindingBasic : MonoBehaviour
     }
     void moveForward()
     {
-        gameObject.transform.position += -transform.up * Time.fixedDeltaTime; // fixed?
+        gameObject.transform.position += -transform.up * gameObject.GetComponent<EnemyBasic>().speed * Time.fixedDeltaTime; // delatime fixed? Also "speed" shouldn't be done like this!
     }
 }
