@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class TurretBasic : ClassTurret
 {
-    public Collider[] intersecting;
+    public Collider2D[] intersecting;
+    LayerMask enemyLayer;
 
-    private void Start()
+    private void Awake()
     {
-        price = 100;
+        enemyLayer = LayerMask.GetMask("EnemyUnit");
+        //price = 100;
         attack = 10;
         attackRange = 5;
         attackSpeed = 1;
@@ -17,11 +19,10 @@ public class TurretBasic : ClassTurret
 
     private void Update()
     {
-        intersecting = Physics.OverlapSphere(gameObject.transform.position, attackRange);
+        intersecting = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRange, enemyLayer);
         if (intersecting.Length != 0)
         {
-            //Instantiate(projectiles[projectileChoice], transform.position, transform.rotation);
-            Debug.Log("shoot");
+            Shoot();
         }
     }
 }
