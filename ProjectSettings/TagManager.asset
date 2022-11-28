@@ -16,8 +16,8 @@ TagManager:
   - MapObject
   - PlayerTurret
   - EnemyUnit
-  - 
-  - 
+  - PlayerBullet
+  - EnemyBullet
   - 
   - 
   - 
