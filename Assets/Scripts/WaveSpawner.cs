@@ -40,3 +40,4 @@ public class WaveSpawner : MonoBehaviour
         Instantiate(enemyBasic, startTile.transform.position, transform.rotation);
     }
 }
+//FUCK
