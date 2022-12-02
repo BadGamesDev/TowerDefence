@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class TurretBasic : ClassTurret
 {
+    private Rigidbody2D turretBody;
+    
     public Collider2D[] inRange;
     LayerMask enemyLayer;
-
+    
     private void Start()
     {
+        turretBody = gameObject.GetComponent<Rigidbody2D>();
+
         enemyLayer = LayerMask.GetMask("EnemyUnit");
         attackDamage = 10;
         attackTimerMax = 5;
@@ -34,26 +38,28 @@ public class TurretBasic : ClassTurret
             attackTimer = 0; 
         }
         
-        if (inRange.Length != 0 && attackTimer == 0)
-        {
-            rotateTurret();
-            fireTurret();
-        }
+        rotateTurret();
+        fireTurret();
     }
     
     void rotateTurret()
     {
-        Vector2 target = inRange[0].transform.position;
-        float angle = Mathf.Atan2(target.x - transform.position.x, target.y - transform.position.y) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.deltaTime);
+        if (inRange.Length != 0)
+        {
+            Vector3 direction = inRange[0].transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            turretBody.rotation = angle;
+        }
     }
 
     void fireTurret()
     {
-        GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation);
-        newProjectile.GetComponent<Rigidbody2D>().AddForce(newProjectile.transform.right * projectileSpeed, ForceMode2D.Impulse);
-        Debug.Log("shoot");
-        attackTimer = attackTimerMax;
+        if (inRange.Length != 0 && attackTimer == 0)
+        {
+            GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation);
+            newProjectile.GetComponent<Rigidbody2D>().AddForce(newProjectile.transform.right * projectileSpeed, ForceMode2D.Impulse);
+            Debug.Log("shoot");
+            attackTimer = attackTimerMax;
+        } 
     }
 }
