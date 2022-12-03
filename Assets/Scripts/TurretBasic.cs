@@ -8,7 +8,7 @@ public class TurretBasic : ClassTurret
     
     public Collider2D[] inRange;
     LayerMask enemyLayer;
-    
+
     private void Start()
     {
         turretBody = gameObject.GetComponent<Rigidbody2D>();
@@ -19,7 +19,7 @@ public class TurretBasic : ClassTurret
         attackTimer = 0;
         attackRange = 5;
 
-        projectileSpeed = 2.5f;
+        projectileSpeed = 0.2f;
     }
 
     private void Update()
@@ -57,8 +57,10 @@ public class TurretBasic : ClassTurret
         if (inRange.Length != 0 && attackTimer == 0)
         {
             GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation);
-            newProjectile.GetComponent<Rigidbody2D>().AddForce(newProjectile.transform.right * projectileSpeed, ForceMode2D.Impulse);
-            Debug.Log("shoot");
+            //newProjectile.GetComponent<Rigidbody2D>().AddForce(newProjectile.transform.right * projectileSpeed, ForceMode2D.Impulse);
+            newProjectile.GetComponent<BulletBasic>().target = inRange[0].transform;
+            newProjectile.GetComponent<BulletBasic>().damage = attackDamage;
+            newProjectile.GetComponent<BulletBasic>().speed = projectileSpeed;
             attackTimer = attackTimerMax;
         } 
     }
