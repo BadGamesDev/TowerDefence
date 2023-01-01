@@ -18,9 +18,6 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {
-        lastPaths.Add(3);
-        lastPaths.Add(3); //find a better way
-
         generateMap();
         generatePath();
     }
@@ -66,6 +63,9 @@ public class MapGenerator : MonoBehaviour
     {
         currentIndex = Mathf.FloorToInt(mapWidth / 2);
         currentTile = mapTiles[currentIndex];
+
+        lastPaths.Add(3);
+        lastPaths.Add(3);
 
         int i = 0; 
         while (i < 1000)

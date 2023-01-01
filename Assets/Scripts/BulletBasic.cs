@@ -5,7 +5,9 @@ using UnityEngine;
 public class BulletBasic : MonoBehaviour
 {
     private Rigidbody2D bulletBody;
+    
     public Transform target;
+    
     public float damage;
     public float speed;
 
@@ -28,8 +30,12 @@ public class BulletBasic : MonoBehaviour
     
     void chaseTarget()
     {
-        //bulletBody.MovePosition(transform.position + ((target.position - transform.position)  * speed * Time.fixedDeltaTime));   
         bulletBody.position = Vector3.MoveTowards(transform.position, target.position, speed);
+        
+        if(target == null) //find a better looking solution when polishing the game
+        {
+            Destroy(gameObject);
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D collision)

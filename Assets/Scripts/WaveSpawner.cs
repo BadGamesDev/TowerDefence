@@ -16,7 +16,7 @@ public class WaveSpawner : MonoBehaviour
     {
         startTile = GameObject.Find("StartTile(Clone)").transform;
         waveCooldown = waveCooldownMax;
-        waveSize = 1;
+        waveSize = 10;
         StartCoroutine(spawnWave());
     }
     
