@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretBasic : ClassTurret
 {
-    private Rigidbody2D turretBody;
+    private Rigidbody2D turretHead;
     
     public Collider2D[] inRange;
     
@@ -12,7 +12,7 @@ public class TurretBasic : ClassTurret
 
     private void Start()
     {
-        turretBody = gameObject.GetComponent<Rigidbody2D>();
+        turretHead = gameObject.GetComponentInChildren<Rigidbody2D>();
 
         enemyLayer = LayerMask.GetMask("EnemyUnit");
         attackDamage = 10;
@@ -46,7 +46,7 @@ public class TurretBasic : ClassTurret
         {
             Vector3 direction = inRange[0].transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            turretBody.rotation = angle;
+            turretHead.rotation = angle;
         }
     }
 
